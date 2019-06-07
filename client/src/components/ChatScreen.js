@@ -3,6 +3,7 @@ import Chatkit from '@pusher/chatkit-client';
 import MessageList from './MessageList';
 import SendMessageForm from './SendMessageForm';
 import TypingIndicator from './TypingIndicator';
+import UserList from './UserList';
 
 class ChatScreen extends React.Component {
     constructor() {
@@ -29,25 +30,28 @@ class ChatScreen extends React.Component {
 
         chatManager.connect()
         .then(currentUser => {
-            console.log('currentUser: ', currentUser)
+            //console.log('currentUser: ', currentUser)
             this.setState({
                 currentUser
             })
             return currentUser.subscribeToRoom({
                 roomId: '19877933',
                 hooks: {
+                    // get all messages
                     onMessage: message => {
                         //console.log('Received message:', message.text)
                         this.setState({
                             messages: [...this.state.messages, message]
                         })
                     },
+                    // get users who started typing
                     onUserStartedTyping: user => {
                         //console.log(user.name, ' started typing...');
                         this.setState({
                             usersWhoAreTyping: [...this.state.usersWhoAreTyping, user.name]
                         })
                     },
+                    // get users who stopped typing
                     onUserStoppedTyping: user => {
                         //console.log(user.name, ' stopped typing...');
                         this.setState({
@@ -56,7 +60,11 @@ class ChatScreen extends React.Component {
                                 username => username !== user.name
                             )
                         })
-                    }
+                    },
+                    onUserCameOnline: () => this.forceUpdate(),
+                    onUserWentOffline: () => this.forceUpdate(),
+                    // new user joined to this room(roomId)
+                    onUserJoined: () => this.forceUpdate()
                 },
                 messageLimit: 100
             })
@@ -86,7 +94,8 @@ class ChatScreen extends React.Component {
 
     render() {
         return (
-            <div>
+            <div style={{display: 'flex', height: '100vh'}}>
+                <UserList users={this.state.currentRoom.users} />
                 <MessageList messages={this.state.messages} />
                 <TypingIndicator typing={this.state.usersWhoAreTyping} />
                 <SendMessageForm onSubmit={this.sendMessage} onChange={this.sendTypingEvent} />

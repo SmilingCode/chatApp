@@ -29,7 +29,7 @@ class SendMessageForm extends React.Component {
 
     render() {
         return (
-            <form onSubmit={this.onSubmit}>
+            <form style={{display: 'flex', flexDirection: 'column'}} onSubmit={this.onSubmit}>
                 <input
                     type="text"
                     placeholder="your text?"
