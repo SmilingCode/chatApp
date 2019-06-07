@@ -15,11 +15,16 @@ class SendMessageForm extends React.Component {
         this.setState({
             text: e.target.value
         })
+
+        this.props.onChange()
     }
 
     onSubmit(e) {
         e.preventDefault()
         this.props.onSubmit(this.state.text)
+        this.setState({
+            text: ''
+        })
     }
 
     render() {
