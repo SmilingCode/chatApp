@@ -36,4 +36,4 @@ class UsernameForm extends React.Component {
     }
 }
 
-export default UsernameForm
+export default UsernameForm;
