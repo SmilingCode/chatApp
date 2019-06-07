@@ -1,9 +1,15 @@
 import React from 'react';
+import UsernameForm from './components/UsernameForm'
 
 class App extends React.Component {
+
+    alertUsername(name) {
+        alert(name)
+    }
+
     render() {
         return (
-            <h1>Chat app</h1>
+            <UsernameForm onSubmit={this.alertUsername} />
         )
     }
 }
