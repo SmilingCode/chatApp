@@ -2,7 +2,6 @@ import React from 'react';
 
 class TypingIndicator extends React.Component {
 
-
     render() {
         if (this.props.typing.length === 0) {
             // <div>

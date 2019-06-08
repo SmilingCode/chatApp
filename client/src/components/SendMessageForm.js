@@ -15,12 +15,13 @@ class SendMessageForm extends React.Component {
         this.setState({
             text: e.target.value
         })
-
+        // this.sendTypingEvent
         this.props.onChange()
     }
 
     onSubmit(e) {
         e.preventDefault()
+        // this.sendMessage
         this.props.onSubmit(this.state.text)
         this.setState({
             text: ''

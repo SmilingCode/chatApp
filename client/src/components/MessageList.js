@@ -7,6 +7,7 @@ class MessageList extends React.Component {
             <div style={{display: 'flex', width: '100%', height: '80vh', overflow: 'scroll'}}>
                 <ul style={{margin: 0}}>
                     {
+                        // this.state.messages []
                         this.props.messages.map((message, index) => (
                             <li key={index}>
                                 <p>{message.senderId}</p>

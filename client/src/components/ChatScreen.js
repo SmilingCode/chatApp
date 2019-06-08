@@ -29,6 +29,7 @@ class ChatScreen extends React.Component {
         })
 
         chatManager.connect()
+        // currentUser.sendMessage/currentUser.isTypingIn
         .then(currentUser => {
             //console.log('currentUser: ', currentUser)
             this.setState({
@@ -68,6 +69,7 @@ class ChatScreen extends React.Component {
                 },
                 messageLimit: 100
             })
+            // currentRoom.users
         }).then(currentRoom => {
             this.setState({
                 currentRoom
